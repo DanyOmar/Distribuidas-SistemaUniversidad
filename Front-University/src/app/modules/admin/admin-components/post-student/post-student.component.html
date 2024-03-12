@@ -1,0 +1,82 @@
+<div class="bg" style="margin-top: 300px;">
+    <mat-spinner *ngIf="isSpinning" [diameter] = "50" class="spinner"></mat-spinner>
+    <div class="parent">
+        <div class="child">
+            <h1 class="form-title">Agregar Estudiante</h1>
+            <form class="login-form" [formGroup]="validateForm">
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Email</mat-label>
+                    <input matInput type="email" placeholder="Ingrese el correo" formControlName="email" />
+                    <mat-error *ngIf="validateForm.get('email')?.hasError('required')">Llene este campo</mat-error>
+                    <mat-error *ngIf="validateForm.get('email')?.hasError('email')">Ingrese un correo valido</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Contraseña</mat-label>
+                    <input matInput type="password" placeholder="Contraseña" formControlName="password"/>
+                    <mat-error *ngIf="validateForm.get('password')?.hasError('required')">Llene este campo</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Confirmar Contraseña</mat-label>
+                    <input matInput type="password" placeholder="Confirmar Contraseña" formControlName="checkPassword"/>
+                    <mat-error *ngIf="validateForm.get('checkPassword')?.hasError('required')">Llene este campo</mat-error>
+                    <mat-error *ngIf="validateForm.get('checkPassword')?.hasError('confirm')">Las contraseñas no coinciden</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput type="text" placeholder="Nombre" formControlName="name"/>
+                    <mat-error *ngIf="validateForm.get('name')?.hasError('required')">Llene este campo</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Apellido paterno</mat-label>
+                    <input matInput type="text" placeholder="Apellido paterno" formControlName="fatherName"/>
+                    <mat-error *ngIf="validateForm.get('fatherName')?.hasError('required')">Llene este campo</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Apellido materno</mat-label>
+                    <input matInput type="text" placeholder="Apellido materno" formControlName="motherName"/>
+                    <mat-error *ngIf="validateForm.get('motherName')?.hasError('required')">Llene este campo</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Clase</mat-label>
+                    <mat-select formControlName="studentClass" placeholder="Seleccione la clase">
+                        <mat-option *ngFor="let class of CLASS" [value]="class">{{class}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="validateForm.get('studentClass')?.hasError('required')">Llene este campo</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Fecha de nacimiento</mat-label>
+                    <input matInput [matDatepicker]="picker" placeholder="Escoja la fecha" formControlName="dob"/>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="validateForm.get('dob')?.hasError('required')">Llene este campo</mat-error>
+                </mat-form-field>
+                
+
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Direccion</mat-label>
+                    <textarea matInput placeholder="Direccion" formControlName="address"></textarea>
+                    <mat-error *ngIf="validateForm.get('address')?.hasError('required')">Llene este campo</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Genero</mat-label>
+                    <mat-select formControlName="gender" placeholder="Seleccione el genero">
+                        <mat-option *ngFor="let gender of GENDER" [value]="gender">{{gender}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="validateForm.get('gender')?.hasError('required')">Llene este campo</mat-error>
+                </mat-form-field>
+
+                <button mat-raised-button color="primary" [disabled]="validateForm.invalid" (click)="postStudent()">
+                    Agregar estudiante
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
